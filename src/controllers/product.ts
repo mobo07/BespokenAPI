@@ -24,7 +24,6 @@ export const getProducts = async (req: Request, res: Response, next: NextFunctio
         } else if(sort) {
             products = await Product.find().sort({createdAt: -1});
         } else if(customizable) {
-            console.log(customizable);
             products = await Product.find({customizable: true});
         }
         else 
