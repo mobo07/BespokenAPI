@@ -16,12 +16,16 @@ export const getProducts = async (req: Request, res: Response, next: NextFunctio
     try {
         const category = req.query.category;
         const sort = req.query.sort;
+        const customizable = req.query.custom;
 
         let products;
         if(category) {
             products = await Product.find({ type: category});
         } else if(sort) {
             products = await Product.find().sort({createdAt: -1});
+        } else if(customizable) {
+            console.log(customizable);
+            products = await Product.find({customizable: true});
         }
         else 
             products = await Product.find();
