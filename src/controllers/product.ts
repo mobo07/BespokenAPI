@@ -24,7 +24,10 @@ export const getProducts = async (req: Request, res: Response, next: NextFunctio
         } else if(sort) {
             products = await Product.find().sort({createdAt: -1});
         } else if(customizable) {
-            products = await Product.find({customizable: true});
+            if(customizable === "true")
+                products = await Product.find({customizable: true});
+            else if(customizable === "false")
+                products = await Product.find({customizable: false});
         }
         else 
             products = await Product.find();
