@@ -20,7 +20,7 @@ export const getProducts = async (req: Request, res: Response, next: NextFunctio
 
         let products;
         if(category) {
-            products = await Product.find({ type: category});
+            products = await Product.find({ type: category, customizable: false });
         } else if(sort) {
             products = await Product.find().sort({createdAt: -1});
         } else if(customizable) {
