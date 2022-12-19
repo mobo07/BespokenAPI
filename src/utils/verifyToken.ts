@@ -4,11 +4,9 @@ import { ReqUser } from "../types/Request";
 import { Token } from "../types/Token";
 
 export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
-    const authHeader = req.headers.token as string;
-    if(!authHeader)
+    const token = req.cookies.access_token as string;
+    if(!token)
         return res.status(401).json("Not Authenticated!");
-    if(authHeader) {
-        const token = authHeader.split(" ")[1];
         jwt.verify(token, process.env.JWT_SECRET!, (err, user) => {
             if(err) res.status(403).json("Invalid Token, please login again.");
             else {
@@ -16,8 +14,6 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) => 
                 next();
             }
         });
-    }
-    
 }
 
 export const verifyTokenAndAuthorization = (req: Request, res: Response, next: NextFunction) => {
