@@ -7,7 +7,6 @@ import productRoute from "./routes/product";
 import designRoute from "./routes/design";
 import orderRoute from "./routes/order";
 import cors from "cors";
-import cookieParser from "cookie-parser";
 
 const app = express();
 
@@ -17,7 +16,6 @@ mongoose.connect(process.env.MONGO_URL!)
 .then(() => console.log("DB connected successfully"))
 .catch(err => console.log(err));
 
-app.use(cookieParser());
 app.use(express.json());
 app.use(cors());
 
